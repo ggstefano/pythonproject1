@@ -1,0 +1,38 @@
+import csv
+
+def csvfiling(list1):
+    with open('stud_info.csv','a', newline='') as csv_file:
+        writer=csv.writer(csv_file)
+        heading=["Name","Age","Phone Number","Email id"]
+        if csv_file.tell()==0:
+            writer.writerow(heading)
+        writer.writerow(list1)
+
+if __name__== '__main__':
+
+    student_no=1
+    while(True):
+        stud_info=input("\nEnter Student #{} Information in this format (Name,Age,PhoneNumber,Email):-".format(student_no))
+
+        info_list= stud_info.split(',')
+        print("\nYou have entered the following details:-\nName:- {}\nAge:- {}\nPhone Number:- {}\nEmail id:- {}\n".format(info_list[0],info_list[1],info_list[2],info_list[3]))
+
+        choice=input("Is your entered Information correct? (yes/no)- ")
+        if choice=="yes":
+            csvfiling(info_list)
+            student_no+=1
+            condition=input("\nPut yes to submit another info,no to discontinue:-")
+
+            if condition == "yes":
+                continue
+            elif condition== "no":
+                break
+            else:
+                print("\nInvalid Choice")
+                break
+
+        elif choice=="no":
+            print("\nEnter the info again.")
+
+        else:
+            print("\nInvalid Choice.")
